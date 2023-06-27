@@ -1,0 +1,20 @@
+name: tilemap-generator
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python>=3.9
+  - pip
+  - pytorch==2.0.1
+  - torchvision==0.15.2
+  - pip:
+    - diffusers
+    - accelerate
+    - huggingface-hub
+    - git+https://github.com/facebookresearch/pytorch3d.git@stable
+    - iopath
+    - numpy
+    - pillow
+    - safetensors
+    - pyrallis

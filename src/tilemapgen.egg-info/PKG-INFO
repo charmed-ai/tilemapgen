@@ -1,0 +1,8 @@
+Metadata-Version: 2.1
+Name: tilemapgen
+Version: 0.0.1
+Summary: Generate isometric tilemaps from text prompts
+Home-page: https://github.com/charmed-ai/tilemap-generator/
+Author: Jeremy Tryba
+Author-email: jeremy@charmed.ai
+License-File: LICENSE
