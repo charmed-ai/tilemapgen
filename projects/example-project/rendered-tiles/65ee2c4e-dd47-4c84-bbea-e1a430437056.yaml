@@ -1,0 +1,11 @@
+azimuth_angle: 45.0
+camera_dist: 10.0
+debug: false
+elevation_angle: 30.0
+floor_texture_id: a617b331-da86-4fcb-869e-0fdae48ea693
+image_size: 512
+mtl_name: wall_edge_ne.mtl
+name: example-project
+obj_name: wall_edge_sw.obj
+parent_path: projects
+wall_texture_id: 01290f26-1fb8-463b-a725-cbfeda354d21

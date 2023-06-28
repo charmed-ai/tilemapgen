@@ -1,0 +1,17 @@
+debug: false
+guidance_scale: 7.5
+max_strength: 0.8
+min_strength: 0.3
+name: example-project
+negative_prompt: logo, words, letters, writing, chaotic. blurry. low quality. terrible
+  art. bad art. glitchy. holes, gaps, people. characters, ugly, broken. muddled. busy.
+  deep fried, complicated. boring. confusing. mutated. artifacts. watermark.
+num_images: 1
+num_inference_steps: 30
+parent_path: projects
+prompt: a vector illustration of an isometric game tile with a solid wall made of
+  brick wall on a floor made of green grass. in the style of an isometric rpg. starcraft.
+  sim city. the sims. rollercoaster tycoon. simple
+rendered_tile_id: 1c046f17-21c0-40a6-92f7-5bac3d14c5db
+seed: 16476159399833811966
+strength: 0.7

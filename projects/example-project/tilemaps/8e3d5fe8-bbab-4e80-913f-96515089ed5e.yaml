@@ -1,0 +1,16 @@
+debug: false
+generated_tile_id: bff3ad0d-99fb-4883-a663-e905f4eba6a0
+name: example-project
+parent_path: projects
+tile_obj_names:
+- wall_edge_ne.obj
+- wall_edge_nw.obj
+- wall_edge_se.obj
+- wall_edge_sw.obj
+- floor_empty.obj
+- floor_raised.obj
+- floor_ramp_ne.obj
+- floor_ramp_nw.obj
+- floor_ramp_se.obj
+- floor_ramp_sw.obj
+width: 256

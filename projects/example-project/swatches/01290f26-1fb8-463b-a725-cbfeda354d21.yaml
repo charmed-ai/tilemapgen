@@ -1,0 +1,9 @@
+debug: false
+guidance_scale: 7.5
+name: example-project
+negative_prompt: null
+num_images: 3
+num_inference_steps: 10
+parent_path: projects
+prompt: brick wall
+seed: 3504355190572875675
