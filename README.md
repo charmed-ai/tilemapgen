@@ -1,9 +1,40 @@
 # Tilemap Generator
+The `tilemapgen` tool can be used to generate individual tiles or full tilemaps. The example project uses assets that create isometric view tiles, but the tool should work for other tile geometries with the right geometry inputs.
+
+## Installation
+
+### From pip
+```
+pip install tilemapgen
+```
+
+Access to the GPU will depend on the environment you are installing into.
+
+### From code
+```bash
+git clone https://github.com/charmed.ai/tilemapgen
+```
+
+Clone this repository.
+
+```bash
+cd tilemapgen
+conda env create -f environment.yml
+```
+
+This package was tested in an anaconda environment built from the included environment.yml file on Ubuntu 22.04.2 LTS with an NVIDIA GeForce RTX 3090 card.
+
+```bash
+pip install -e .
+```
+
+Install the pip from source
+
 
 ## Usage
 `tilemapgen <command> [options]`
 
-The `tilemapgen` tool can be used to generate individual tiles or full tilemaps. By default, outputs will be written to the `projects/example-project` directory but this can be changed by either supplying a `--config_path` with updated configuration, or by using the `--name` and `--parent_path` project arguments.
+By default, outputs will be written to the `projects/example-project` directory but this can be changed by either supplying a `--config_path` with updated configuration, or by using the `--name` and `--parent_path` project arguments.
 
 ## swatch
 `tilemapgen swatch [-h] [--config_path str] [--name str] [--parent_path Path] [--debug bool] [--prompt str] [--negative_prompt str] [--seed int] [--num_inference_steps int] [--guidance_scale float] [--num_images int]`

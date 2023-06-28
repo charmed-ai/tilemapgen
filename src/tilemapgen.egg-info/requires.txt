@@ -1,5 +1,0 @@
-torch
-torchvision
-transformers
-diffusers
-pyrallis

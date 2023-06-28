@@ -15,6 +15,7 @@ dependencies:
   - pytorch3d
   - pip:
     - diffusers
+    - transformers
     - accelerate
     - huggingface-hub
     - iopath
