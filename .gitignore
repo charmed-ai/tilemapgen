@@ -1,2 +1,4 @@
-projects/
+projects/example-project/swatches
+projects/example-project/tiles
+projects/example-project/tilemaps
 *.egg-info

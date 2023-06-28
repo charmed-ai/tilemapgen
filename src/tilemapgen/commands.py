@@ -1,30 +1,30 @@
-from tilemapgen import configuration, swatch
+from tilemapgen import configuration, utils
+from tilemapgen.command_definitions import swatch, render_tile
 import pyrallis
 import sys
+from uuid import uuid4
+import logging
 
-
-def save_image(image, name: str, cfg: configuration.ProjectConfig):
-    cfg.path.mkdir(parents=True, exist_ok=True)
-    image.save(cfg.path / name)
-
-def swatch_command(cfg: configuration.ProjectConfig):
-    print("PROJECT CONFIG", cfg)
-    print("SWATCH", cfg.wall_swatch)
-    images = swatch.generate(
-        cfg.wall_swatch.prompt
-    )
-    for idx, image in enumerate(images):
-        save_image(image, f"image_{idx}.png", cfg)
+def generate_and_save(command_module, cfg, name):
+    images = command_module.generate(cfg)
+    for image in images:
+        filename = f"{name}_{uuid4()}.png"
+        full_path = command_module.output_path(cfg)/ filename
+        logging.info(f"Saving {full_path}")
+        utils.save_image(image, filename, command_module.output_path(cfg))
 
 COMMANDS = {
-    'swatch': swatch_command
+    'swatch': swatch,
+    'render-tile': render_tile,
 }
 
-def execute(command, args):
-    project_config = pyrallis.parse(config_class=configuration.ProjectConfig, args=sys.argv[2:])
-    if command not in COMMANDS:
-        print(f"{command} is not a recognized command.")
+def execute(command_name, args):
+    if command_name not in COMMANDS:
+        print(f"{command_name} is not a recognized command {list(COMMANDS.keys())}.")
         exit(1)
 
-    COMMANDS[command](project_config)
-    print(project_config)
+    logging.info(f"Executing {command_name}")
+    command_module = COMMANDS[command_name]
+    config = pyrallis.parse(config_class=command_module.config_class(), args=sys.argv[2:])
+
+    generate_and_save(command_module, config, command_name)

@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 
 from tilemapgen import commands
-import pyrallis
 import sys
-
+import logging
+FORMAT = '%(asctime)s %(message)s'
+logging.basicConfig(level=logging.INFO, format=FORMAT)
 def main():
     command = sys.argv[1]
     commands.execute(command, sys.argv[2:])

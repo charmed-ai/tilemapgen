@@ -12,11 +12,12 @@ setup(name='tilemapgen',
       package_dir={'': 'src'},
       py_modules=['tilemapgen'],
       install_requires=[
-          'torch',
-          'torchvision',
+          'torch==2.0.1',
+          'torchvision==0.15.2',
           'transformers',
           'diffusers',
           'pyrallis',
+          'pytorch3d'
       ],
       scripts=['scripts/tilemapgen'],
      )

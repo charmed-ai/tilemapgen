@@ -1,11 +1,11 @@
 -f https://download.pytorch.org/whl/torch_stable.html
-pytorch==2.0.1
-torchvision==0.15.2
+torch=2.0.1
+torchvision
 transformers
 diffusers
 accelerate
 huggingface-hub
-git+https://github.com/facebookresearch/pytorch3d.git@stable
+pytorch3d @ git+https://github.com/facebookresearch/pytorch3d.git@stable
 iopath
 numpy
 pillow

@@ -1,18 +1,22 @@
-name: tilemap-generator
+name: tilemapgen
 channels:
   - pytorch
+  - nvidia
+  - pytorch3d-nightly
   - conda-forge
   - defaults
 dependencies:
-  - python>=3.9
+  - python
   - pip
+  - cuda~=11.7
+  - pytorch-cuda
   - pytorch==2.0.1
   - torchvision==0.15.2
+  - pytorch3d
   - pip:
     - diffusers
     - accelerate
     - huggingface-hub
-    - git+https://github.com/facebookresearch/pytorch3d.git@stable
     - iopath
     - numpy
     - pillow
