@@ -40,7 +40,7 @@ def config_class():
     return RenderTileConfig
 
 def output_path(cfg: RenderTileConfig):
-    return cfg.tile_path
+    return cfg.rendered_tile_path
 
 def load_mtl(
     mtl_filename,

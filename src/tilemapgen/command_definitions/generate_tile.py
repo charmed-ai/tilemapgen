@@ -1,40 +1,27 @@
 import torch
 import random
-from tilemapgen.configuration import Tile2TileConfig, TileConfig, SwatchConfig
+from tilemapgen.configuration import GenerateTileConfig, SwatchConfig, RenderTileConfig
 from tilemapgen.stable_diffusion import get_depth2img_pipe, DEVICE, MAX_SEED
 from tilemapgen.logging import logger
 import pyrallis
-from pyrallis.cfgparsing import load_config
 from pyrallis.parsers.decoding import decode
 from PIL import Image
 
 
-def get_tile_config(path):
-    with open(path, 'r') as f:
-        dict = load_config(f)
-        return decode(TileConfig, {
-            'tile_id': dict.get('tile_id', None),
-            'wall_texture_id': dict.get('wall_texture_id', None),
-            'floor_texture_id': dict.get('floor_texture_id', None),
-            'prompt': dict.get('prompt', None),
-        })
-
-def get_prompt(cfg: Tile2TileConfig):
+def get_prompt(cfg: GenerateTileConfig):
     if cfg.prompt is not None:
         return cfg.prompt
 
-    tile_config = get_tile_config(cfg.tile_config_path)
-    if tile_config.prompt is not None:
-        return tile_config.prompt
+    tile_config = pyrallis.load(RenderTileConfig, open(cfg.rendered_tile_config_path, 'r'))
 
     wall_prompt = None
     if tile_config.wall_texture_config_path is not None:
-        config = pyrallis.load(SwatchConfig, open(cfg.wall_texture_config_path,'r'))
+        config = pyrallis.load(SwatchConfig, open(tile_config.wall_texture_config_path,'r'))
         wall_prompt = config.prompt
 
     floor_prompt = None
     if tile_config.floor_texture_config_path is not None:
-        config = pyrallis.load(SwatchConfig, open(cfg.floor_texture_config_path, 'r'))
+        config = pyrallis.load(SwatchConfig, open(tile_config.floor_texture_config_path, 'r'))
         floor_prompt = config.prompt
 
     if wall_prompt is not None and floor_prompt is not None:
@@ -49,31 +36,35 @@ def get_prompt(cfg: Tile2TileConfig):
     logger.error("No valid tile prompt. Falling back to generic.")
     return "a vevtor illustration of an isometric game tile. in the style of an isometric rpg. starcraft. sim city. the sims. rollercoaster tycoon. simple"
 
-def generate(cfg: Tile2TileConfig):
+def generate(cfg: GenerateTileConfig):
     pipe = get_depth2img_pipe()
-    seed = cfg.seed
 
-    if seed is None:
-        seed = int(random.randint(0,MAX_SEED))
-    generator = torch.Generator(DEVICE).manual_seed(seed)
+    if cfg.seed is None:
+        cfg.seed = int(random.randint(0,MAX_SEED))
+    generator = torch.Generator(DEVICE).manual_seed(cfg.seed)
 
+    cfg.prompt = get_prompt(cfg)
 
-    images = pipe(
-        [get_prompt(cfg)] * cfg.num_images,
-        image=Image.open(cfg.tile_image_path),
-        negative_prompt=[cfg.negative_prompt] * cfg.num_images,
-        num_inference_steps=cfg.num_inference_steps,
-        guidance_scale=cfg.guidance_scale,
-        strength=cfg.resolved_strength,
-        generator=generator,
-    ).images
-    return images
+    for i in range(cfg.num_images):
+        if i > 0:
+            cfg.seed = int(random.randint(0,MAX_SEED))
+            generator = torch.Generator(DEVICE).manual_seed(cfg.seed)
+        image = pipe(
+            cfg.prompt,
+            image=Image.open(cfg.rendered_tile_image_path),
+            negative_prompt=cfg.negative_prompt,
+            num_inference_steps=cfg.num_inference_steps,
+            guidance_scale=cfg.guidance_scale,
+            strength=cfg.strength,
+            generator=generator,
+        ).images[0]
+        yield image
 
 def config_class():
-    return Tile2TileConfig
+    return GenerateTileConfig
 
-def output_path(cfg: Tile2TileConfig):
-    return cfg.tile_path
+def output_path(cfg: GenerateTileConfig):
+    return cfg.generated_tile_path
 
 
 

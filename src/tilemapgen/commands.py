@@ -1,23 +1,16 @@
 from tilemapgen import configuration, utils
-from tilemapgen.command_definitions import swatch, render_tile, tile2tile
+from tilemapgen.command_definitions import swatch, render_tile, generate_tile, tilemap
 from tilemapgen.logging import configure_logger, logger
 import pyrallis
 import sys
 from uuid import uuid4
 
 
-def generate_and_save(command_module, cfg, name):
-    images = command_module.generate(cfg)
-    for image in images:
-        id = str(uuid4())
-        logger.info(f"Generated id = {id}")
-        utils.save_image(image, f"{id}.png", command_module.output_path(cfg))
-        utils.save_config(cfg, f"{id}.yaml", command_module.output_path(cfg))
-
 COMMANDS = {
     'swatch': swatch,
     'render-tile': render_tile,
-    'tile2tile': tile2tile
+    'generate-tile': generate_tile,
+    'tilemap': tilemap,
 }
 
 def execute(command_name, args):
@@ -30,4 +23,4 @@ def execute(command_name, args):
     configure_logger(config)
 
     logger.info(f"Executing {command_name}")
-    generate_and_save(command_module, config, command_name)
+    utils.generate_and_save(command_module, config)
