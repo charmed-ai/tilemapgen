@@ -4,7 +4,9 @@ The `tilemapgen` tool can be used to generate individual tiles or full tilemaps.
 ## Installation
 
 ### From pip
-```
+
+First [install pytorch3d](https://github.com/facebookresearch/pytorch3d/blob/main/INSTALL.md), then install the tilemapgen pip.
+```bash
 pip install tilemapgen
 ```
 
