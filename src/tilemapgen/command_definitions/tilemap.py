@@ -33,7 +33,6 @@ def draw_tilemap(style_dict, width):
     for idx, (obj_path, tile_image_path) in enumerate(style_dict.items()):
         x = idx % width_count
         y = floor(idx / width_count)
-        print(f"({x},{y})")
         cursor = (x * width, y * width)
         tile = Image.open(tile_image_path).resize((width, width))
         tilemap.paste(tile, cursor)
