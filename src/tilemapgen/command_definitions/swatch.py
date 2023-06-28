@@ -22,7 +22,7 @@ def config_class():
     return SwatchConfig
 
 def output_path(cfg: SwatchConfig):
-    return cfg.project.swatch_path
+    return cfg.swatch_path
 
 
 

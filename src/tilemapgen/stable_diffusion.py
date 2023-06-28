@@ -31,5 +31,5 @@ def get_depth2img_pipe():
     global depth2img_pipe
     if depth2img_pipe is None:
         depth2img_pipe = StableDiffusionDepth2ImgPipeline.from_pretrained(DEPTH2IMG_MODEL_NAME, torch_dtype=DTYPE).to(DEVICE)
-        txt2img_pipe.enable_attention_slicing()
-    return txt2img_pipe
+        depth2img_pipe.enable_attention_slicing()
+    return depth2img_pipe

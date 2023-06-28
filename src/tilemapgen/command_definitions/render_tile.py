@@ -26,8 +26,8 @@ def generate(cfg: RenderTileConfig):
     images = render(
         cfg.obj_path,
         cfg.mtl_path,
-        cfg.wall_texture_path,
-        cfg.floor_texture_path,
+        cfg.wall_texture_image_path,
+        cfg.floor_texture_image_path,
         cfg.image_size,
         cfg.camera_dist,
         cfg.elevation_angle,
@@ -40,7 +40,7 @@ def config_class():
     return RenderTileConfig
 
 def output_path(cfg: RenderTileConfig):
-    return cfg.project.tile_path
+    return cfg.tile_path
 
 def load_mtl(
     mtl_filename,
