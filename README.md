@@ -1,6 +1,6 @@
-<img src="images/logo.svg"
+<a href="https://charmed.ai"><img src="images/logo.svg"
      alt="Charmed"
-     style="margin: auto; background: white; padding:16px;" />
+     style="margin: auto; background: white; padding:16px;" /></a>
 
 [Charmed](https://charmed.ai) is building AI tools for video game asset creation. You'll find a web version of [this tool](https://dungeon.charmed.ai), plus tools to [generate UV-mapped textures](https://texture.charmed.ai), and [generate quest dialogs](https://quest.charmed.ai).
 
